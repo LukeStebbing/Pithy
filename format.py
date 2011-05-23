@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 """
 Format a string using names in the current scope.
 
