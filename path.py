@@ -30,6 +30,9 @@ class Path(str):
     def exists(self):
         return pth.exists(self)
 
+    def remove(self):
+        os.remove(self)
+
     def open(self, mode='r'):
         return codecs.open(self, mode, encoding='utf-8')
 
