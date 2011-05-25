@@ -27,8 +27,16 @@ class Path(str):
         return self.replace(P('~'), '~') if spec == '~' else self
 
     @property
+    def absolute(self):
+        return P(pth.abspath(self))
+
+    @property
     def exists(self):
         return pth.exists(self)
+
+    @property
+    def is_file(self):
+        return pth.isfile(self)
 
     def remove(self):
         os.remove(self)
