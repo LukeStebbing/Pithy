@@ -10,8 +10,8 @@ from pithy import F
 
 class PathFactory(object):
 
-    def __call__(self, path):
-        return Path(pth.normpath(pth.expanduser(path)))
+    def __call__(self, *parts):
+        return Path(pth.normpath(pth.expanduser(pth.join(*parts))))
 
     @property
     def cwd(self):
