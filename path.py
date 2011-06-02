@@ -46,6 +46,9 @@ class Path(str):
     def is_file(self):
         return pth.isfile(self)
 
+    def move(self, other):
+        os.rename(self, other)
+
     def remove(self):
         os.remove(self)
 
