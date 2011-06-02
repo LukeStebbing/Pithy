@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import codecs
+from glob import iglob
 import os
 import os.path as pth
 
@@ -11,7 +12,10 @@ from pithy import F
 class PathFactory(object):
 
     def __call__(self, *parts):
-        return Path(pth.normpath(pth.expanduser(pth.join(*parts))))
+        path = pth.normpath(pth.expanduser(pth.join(*parts)))
+        if set(path) & set('[?*'):
+            return glob(path)
+        return Path(path)
 
     @property
     def cwd(self):
@@ -19,6 +23,10 @@ class PathFactory(object):
 
 
 P = PathFactory()
+
+def glob(pattern):
+    for path in iglob(pattern):
+        yield Path(path)
 
 
 class Path(str):
